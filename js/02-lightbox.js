@@ -4,12 +4,12 @@ const galleryContainer = document.querySelector(".gallery");
 
 galleryContainer.insertAdjacentHTML(
   "beforeend",
-  createGallaryItemsMarkup(galleryItems)
+  createGalleryItemsMarkup(galleryItems)
 );
 
 galleryContainer.addEventListener("click", imageClickedCheck);
 
-function createGallaryItemsMarkup(galleryItems) {
+function createGalleryItemsMarkup(galleryItems) {
   return [...galleryItems]
     .map(
       (item) => `
