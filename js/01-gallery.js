@@ -38,24 +38,25 @@ function getUrlFromImageItem(event) {
 }
 
 function createModalMarkup(event) {
-    if (!getUrlFromImageItem(event)) {
-        return;
-      }
+  if (!getUrlFromImageItem(event)) {
+    return;
+  }
 
   const instance = basicLightbox.create(
     `
   <img src="${getUrlFromImageItem(event)}" alt="${event.target.alt}">
-`,
-    {
-      onShow: (instance) => {
-        window.addEventListener("keydown", (event) => {
-          if (event.code === "Escape") {
-            instance.close();
-          }
-        });
-      },
-    }
+`
   );
 
-  instance.show();
+  instance.show(() => {
+    window.addEventListener("keydown", escapeHandler);
+  });
+  console.log(instance);
+
+  function escapeHandler(event) {
+    if (event.code === "Escape") {
+      instance.close(window.removeEventListener("keydown", escapeHandler));
+    }
+  }
 }
+
