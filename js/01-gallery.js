@@ -4,7 +4,7 @@ import { galleryItems } from "./gallery-items.js";
 // console.log(galleryItems);
 
 const galleryContainer = document.querySelector(".gallery");
-const instance = basicLightbox.create(`<img>`, {
+const galleryInstance = basicLightbox.create(`<img>`, {
   onShow: () => window.addEventListener("keydown", closeModalByEscapePress),
   onClose: () => window.removeEventListener("keydown", closeModalByEscapePress),
 });
@@ -13,7 +13,6 @@ galleryContainer.insertAdjacentHTML(
   "beforeend",
   createGallaryItemsMarkup(galleryItems)
 );
-
 galleryContainer.addEventListener("click", showModalImage);
 
 function createGallaryItemsMarkup(galleryItems) {
@@ -46,15 +45,15 @@ function showModalImage(event) {
   if (!getUrlFromImageItem(event)) {
     return;
   }
-  instance.element().lastElementChild.innerHTML = `<img src="${getUrlFromImageItem(
-    event
-  )}" alt="${event.target.alt}">`;
+  galleryInstance.element().lastElementChild.innerHTML = `<img 
+  src="${getUrlFromImageItem(event)}" 
+  alt="${event.target.alt}">`;
 
-  instance.show();
+  galleryInstance.show();
 }
 
 function closeModalByEscapePress(event) {
   if (event.code === "Escape") {
-    instance.close();
+    galleryInstance.close();
   }
 }
