@@ -40,6 +40,6 @@ function showGallery() {
 
   gallery.on("closed.simplelightbox", () => {
     gallery.refresh();
-    galleryContainer.removeEventListener("click", imageIsClickedCheck);
+    galleryContainer.removeEventListener("click", showGallery);
   });
 }
