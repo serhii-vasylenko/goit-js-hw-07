@@ -6,8 +6,6 @@ galleryContainer.insertAdjacentHTML(
   "beforeend",
   createGalleryItemsMarkup(galleryItems)
 );
-galleryContainer.addEventListener("click", showGallery);
-
 
 function createGalleryItemsMarkup(galleryItems) {
   return [...galleryItems]
@@ -28,18 +26,9 @@ function createGalleryItemsMarkup(galleryItems) {
     .join("");
 }
 
-function showGallery() {
-  const gallery = new SimpleLightbox(".gallery a", {
-    captionsData: "alt",
-    captionDelay: 250,
-    overlayOpacity: 0.5,
-    showCounter: false,
-  });
-
-  gallery.open();
-
-  gallery.on("closed.simplelightbox", () => {
-    gallery.refresh();
-    galleryContainer.removeEventListener("click", showGallery);
-  });
-}
+const gallery = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionDelay: 250,
+  overlayOpacity: 0.5,
+  showCounter: false,
+});
