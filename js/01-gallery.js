@@ -1,21 +1,20 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-// console.log(galleryItems);
-
 const galleryContainer = document.querySelector(".gallery");
 const galleryInstance = basicLightbox.create(`<img>`, {
   onShow: () => window.addEventListener("keydown", closeModalByEscapePress),
   onClose: () => window.removeEventListener("keydown", closeModalByEscapePress),
 });
+const galleryInstanceImage = galleryInstance.element().querySelector("img");
 
 galleryContainer.insertAdjacentHTML(
   "beforeend",
-  createGallaryItemsMarkup(galleryItems)
+  createGalleryItemsMarkup(galleryItems)
 );
 galleryContainer.addEventListener("click", showModalImage);
 
-function createGallaryItemsMarkup(galleryItems) {
+function createGalleryItemsMarkup(galleryItems) {
   return [...galleryItems]
     .map(
       (item) => `<div class="gallery__item">
@@ -45,15 +44,24 @@ function showModalImage(event) {
   if (!getUrlFromImageItem(event)) {
     return;
   }
-  galleryInstance.element().lastElementChild.innerHTML = `<img 
-  src="${getUrlFromImageItem(event)}" 
-  alt="${event.target.alt}">`;
+
+  // v1
+  // galleryInstance.element().lastElementChild.innerHTML = `<img
+  // src="${getUrlFromImageItem(event)}"
+  // alt="${event.target.alt}">`;
+
+  // v2
+  galleryInstanceImage.src = `${getUrlFromImageItem(event)}`;
+  galleryInstanceImage.alt = `${event.target.alt}`;
 
   galleryInstance.show();
 }
 
 function closeModalByEscapePress(event) {
-  if (event.code === "Escape") {
-    galleryInstance.close();
+  if (event.code !== "Escape") {
+    return;
   }
+  galleryInstance.close();
 }
+
+console.log(galleryItems);
