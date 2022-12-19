@@ -6,8 +6,8 @@ galleryContainer.insertAdjacentHTML(
   "beforeend",
   createGalleryItemsMarkup(galleryItems)
 );
-
 galleryContainer.addEventListener("click", imageIsClickedCheck);
+
 
 function createGalleryItemsMarkup(galleryItems) {
   return [...galleryItems]
@@ -32,7 +32,6 @@ function imageIsClickedCheck(event) {
   event.preventDefault();
   const { nodeName } = event.target;
   if (nodeName !== "IMG") {
-    console.log("Clicked element is not an image!");
     return;
   }
 
