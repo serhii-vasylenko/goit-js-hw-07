@@ -6,7 +6,7 @@ galleryContainer.insertAdjacentHTML(
   "beforeend",
   createGalleryItemsMarkup(galleryItems)
 );
-galleryContainer.addEventListener("click", imageIsClickedCheck);
+galleryContainer.addEventListener("click", showGallery);
 
 
 function createGalleryItemsMarkup(galleryItems) {
@@ -26,16 +26,6 @@ function createGalleryItemsMarkup(galleryItems) {
     `
     )
     .join("");
-}
-
-function imageIsClickedCheck(event) {
-  event.preventDefault();
-  const { nodeName } = event.target;
-  if (nodeName !== "IMG") {
-    return;
-  }
-
-  showGallery();
 }
 
 function showGallery() {
