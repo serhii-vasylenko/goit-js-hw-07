@@ -26,7 +26,7 @@ function createGalleryItemsMarkup(galleryItems) {
     .join("");
 }
 
-const gallery = new SimpleLightbox(".gallery a", {
+new SimpleLightbox(".gallery a", {
   captionsData: "alt",
   captionDelay: 250,
   overlayOpacity: 0.5,
